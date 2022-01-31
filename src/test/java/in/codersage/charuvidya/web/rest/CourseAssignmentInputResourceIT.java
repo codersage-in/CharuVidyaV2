@@ -65,6 +65,21 @@ class CourseAssignmentInputResourceIT {
      */
     public static CourseAssignmentInput createEntity(EntityManager em) {
         CourseAssignmentInput courseAssignmentInput = new CourseAssignmentInput().input(DEFAULT_INPUT);
+        // Add required entity
+        CourseAssignment courseAssignment;
+        if (TestUtil.findAll(em, CourseAssignment.class).isEmpty()) {
+            courseAssignment = CourseAssignmentResourceIT.createEntity(em);
+            em.persist(courseAssignment);
+            em.flush();
+        } else {
+            courseAssignment = TestUtil.findAll(em, CourseAssignment.class).get(0);
+        }
+        courseAssignmentInput.setCourseAssignment(courseAssignment);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        courseAssignmentInput.setUser(user);
         return courseAssignmentInput;
     }
 
@@ -76,6 +91,21 @@ class CourseAssignmentInputResourceIT {
      */
     public static CourseAssignmentInput createUpdatedEntity(EntityManager em) {
         CourseAssignmentInput courseAssignmentInput = new CourseAssignmentInput().input(UPDATED_INPUT);
+        // Add required entity
+        CourseAssignment courseAssignment;
+        if (TestUtil.findAll(em, CourseAssignment.class).isEmpty()) {
+            courseAssignment = CourseAssignmentResourceIT.createUpdatedEntity(em);
+            em.persist(courseAssignment);
+            em.flush();
+        } else {
+            courseAssignment = TestUtil.findAll(em, CourseAssignment.class).get(0);
+        }
+        courseAssignmentInput.setCourseAssignment(courseAssignment);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        courseAssignmentInput.setUser(user);
         return courseAssignmentInput;
     }
 

@@ -73,6 +73,21 @@ class CourseAssignmentProgressResourceIT {
         CourseAssignmentProgress courseAssignmentProgress = new CourseAssignmentProgress()
             .completed(DEFAULT_COMPLETED)
             .completedDate(DEFAULT_COMPLETED_DATE);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        courseAssignmentProgress.setUser(user);
+        // Add required entity
+        CourseAssignment courseAssignment;
+        if (TestUtil.findAll(em, CourseAssignment.class).isEmpty()) {
+            courseAssignment = CourseAssignmentResourceIT.createEntity(em);
+            em.persist(courseAssignment);
+            em.flush();
+        } else {
+            courseAssignment = TestUtil.findAll(em, CourseAssignment.class).get(0);
+        }
+        courseAssignmentProgress.setCourseAssignment(courseAssignment);
         return courseAssignmentProgress;
     }
 
@@ -86,6 +101,21 @@ class CourseAssignmentProgressResourceIT {
         CourseAssignmentProgress courseAssignmentProgress = new CourseAssignmentProgress()
             .completed(UPDATED_COMPLETED)
             .completedDate(UPDATED_COMPLETED_DATE);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        courseAssignmentProgress.setUser(user);
+        // Add required entity
+        CourseAssignment courseAssignment;
+        if (TestUtil.findAll(em, CourseAssignment.class).isEmpty()) {
+            courseAssignment = CourseAssignmentResourceIT.createUpdatedEntity(em);
+            em.persist(courseAssignment);
+            em.flush();
+        } else {
+            courseAssignment = TestUtil.findAll(em, CourseAssignment.class).get(0);
+        }
+        courseAssignmentProgress.setCourseAssignment(courseAssignment);
         return courseAssignmentProgress;
     }
 

@@ -67,6 +67,21 @@ class CourseSessionProgressResourceIT {
      */
     public static CourseSessionProgress createEntity(EntityManager em) {
         CourseSessionProgress courseSessionProgress = new CourseSessionProgress().watchSeconds(DEFAULT_WATCH_SECONDS);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        courseSessionProgress.setUser(user);
+        // Add required entity
+        CourseSession courseSession;
+        if (TestUtil.findAll(em, CourseSession.class).isEmpty()) {
+            courseSession = CourseSessionResourceIT.createEntity(em);
+            em.persist(courseSession);
+            em.flush();
+        } else {
+            courseSession = TestUtil.findAll(em, CourseSession.class).get(0);
+        }
+        courseSessionProgress.setCourseSession(courseSession);
         return courseSessionProgress;
     }
 
@@ -78,6 +93,21 @@ class CourseSessionProgressResourceIT {
      */
     public static CourseSessionProgress createUpdatedEntity(EntityManager em) {
         CourseSessionProgress courseSessionProgress = new CourseSessionProgress().watchSeconds(UPDATED_WATCH_SECONDS);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        courseSessionProgress.setUser(user);
+        // Add required entity
+        CourseSession courseSession;
+        if (TestUtil.findAll(em, CourseSession.class).isEmpty()) {
+            courseSession = CourseSessionResourceIT.createUpdatedEntity(em);
+            em.persist(courseSession);
+            em.flush();
+        } else {
+            courseSession = TestUtil.findAll(em, CourseSession.class).get(0);
+        }
+        courseSessionProgress.setCourseSession(courseSession);
         return courseSessionProgress;
     }
 

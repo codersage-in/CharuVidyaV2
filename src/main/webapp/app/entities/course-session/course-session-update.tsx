@@ -90,7 +90,7 @@ export const CourseSessionUpdate = (props: RouteComponentProps<{ id: string }>) 
                   required
                   readOnly
                   id="course-session-id"
-                  label={translate('charuVidyaApp.courseSession.id')}
+                  label={translate('global.field.id')}
                   validate={{ required: true }}
                 />
               ) : null}
@@ -102,7 +102,8 @@ export const CourseSessionUpdate = (props: RouteComponentProps<{ id: string }>) 
                 type="text"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
-                  maxLength: { value: 255, message: translate('entity.validation.maxlength', { max: 255 }) },
+                  minLength: { value: 10, message: translate('entity.validation.minlength', { min: 10 }) },
+                  maxLength: { value: 42, message: translate('entity.validation.maxlength', { max: 42 }) },
                 }}
               />
               <ValidatedField
@@ -112,7 +113,8 @@ export const CourseSessionUpdate = (props: RouteComponentProps<{ id: string }>) 
                 data-cy="sessionDescription"
                 type="text"
                 validate={{
-                  maxLength: { value: 255, message: translate('entity.validation.maxlength', { max: 255 }) },
+                  minLength: { value: 10, message: translate('entity.validation.minlength', { min: 10 }) },
+                  maxLength: { value: 400, message: translate('entity.validation.maxlength', { max: 400 }) },
                 }}
               />
               <ValidatedField
@@ -123,7 +125,8 @@ export const CourseSessionUpdate = (props: RouteComponentProps<{ id: string }>) 
                 type="text"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
-                  maxLength: { value: 300, message: translate('entity.validation.maxlength', { max: 300 }) },
+                  minLength: { value: 10, message: translate('entity.validation.minlength', { min: 10 }) },
+                  maxLength: { value: 42, message: translate('entity.validation.maxlength', { max: 42 }) },
                 }}
               />
               <ValidatedField
@@ -155,17 +158,8 @@ export const CourseSessionUpdate = (props: RouteComponentProps<{ id: string }>) 
                 data-cy="sessionResource"
                 type="text"
                 validate={{
-                  maxLength: { value: 300, message: translate('entity.validation.maxlength', { max: 300 }) },
-                }}
-              />
-              <ValidatedField
-                label={translate('charuVidyaApp.courseSession.sessionQuiz')}
-                id="course-session-sessionQuiz"
-                name="sessionQuiz"
-                data-cy="sessionQuiz"
-                type="text"
-                validate={{
-                  maxLength: { value: 300, message: translate('entity.validation.maxlength', { max: 300 }) },
+                  minLength: { value: 10, message: translate('entity.validation.minlength', { min: 10 }) },
+                  maxLength: { value: 42, message: translate('entity.validation.maxlength', { max: 42 }) },
                 }}
               />
               <ValidatedField
@@ -206,6 +200,7 @@ export const CourseSessionUpdate = (props: RouteComponentProps<{ id: string }>) 
                 data-cy="courseSection"
                 label={translate('charuVidyaApp.courseSession.courseSection')}
                 type="select"
+                required
               >
                 <option value="" key="0" />
                 {courseSections
@@ -216,6 +211,9 @@ export const CourseSessionUpdate = (props: RouteComponentProps<{ id: string }>) 
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/course-session" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

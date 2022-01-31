@@ -17,21 +17,22 @@ public class CourseAssignmentInput implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @Size(max = 200)
     @Column(name = "input", length = 200)
     private String input;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "courseSection", "courseAssignmentInputs", "courseAssignmentOutputs" }, allowSetters = true)
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties(value = { "courseSession" }, allowSetters = true)
     private CourseAssignment courseAssignment;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

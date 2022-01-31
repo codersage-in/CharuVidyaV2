@@ -25,7 +25,7 @@ export const CourseEnrollmentDetail = (props: RouteComponentProps<{ id: string }
         <dl className="jh-entity-details">
           <dt>
             <span id="id">
-              <Translate contentKey="charuVidyaApp.courseEnrollment.id">Id</Translate>
+              <Translate contentKey="global.field.id">ID</Translate>
             </span>
           </dt>
           <dd>{courseEnrollmentEntity.id}</dd>
@@ -56,7 +56,7 @@ export const CourseEnrollmentDetail = (props: RouteComponentProps<{ id: string }
           <dt>
             <Translate contentKey="charuVidyaApp.courseEnrollment.course">Course</Translate>
           </dt>
-          <dd>{courseEnrollmentEntity.course ? courseEnrollmentEntity.course.id : ''}</dd>
+          <dd>{courseEnrollmentEntity.course ? courseEnrollmentEntity.course.courseTitle : ''}</dd>
         </dl>
         <Button tag={Link} to="/course-enrollment" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

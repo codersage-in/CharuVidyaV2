@@ -17,7 +17,7 @@
       "detail": {
         "title": "Course Enrollment"
       },
-      "id": "Id",
+      "id": "ID",
       "enrollementDate": "Enrollement Date",
       "lastAccessedDate": "Last Accessed Date",
       "user": "User",

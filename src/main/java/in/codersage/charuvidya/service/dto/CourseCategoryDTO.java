@@ -9,15 +9,14 @@ import javax.validation.constraints.*;
  */
 public class CourseCategoryDTO implements Serializable {
 
-    @NotNull
     private Long id;
 
     @NotNull
-    @Size(max = 255)
+    @Size(min = 10, max = 42)
     private String title;
 
     @NotNull
-    @Size(max = 255)
+    @Size(min = 10, max = 42)
     private String logo;
 
     @NotNull
@@ -26,7 +25,7 @@ public class CourseCategoryDTO implements Serializable {
     @NotNull
     private Integer parentId;
 
-    @Size(max = 100)
+    @Size(min = 10, max = 400)
     private String description;
 
     public Long getId() {

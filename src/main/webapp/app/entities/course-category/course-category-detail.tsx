@@ -25,7 +25,7 @@ export const CourseCategoryDetail = (props: RouteComponentProps<{ id: string }>)
         <dl className="jh-entity-details">
           <dt>
             <span id="id">
-              <Translate contentKey="charuVidyaApp.courseCategory.id">Id</Translate>
+              <Translate contentKey="global.field.id">ID</Translate>
             </span>
           </dt>
           <dd>{courseCategoryEntity.id}</dd>

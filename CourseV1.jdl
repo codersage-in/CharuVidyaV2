@@ -2,7 +2,6 @@ DEFAULT_MIN_LENGTH = 10
 DEFAULT_MAX_LENGTH = 42
 
 entity Course {
-       id Long required,
        courseTitle String minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH) required,
        courseDescription String minlength(DEFAULT_MIN_LENGTH) maxlength(400) required,
        courseObjectives String minlength(DEFAULT_MIN_LENGTH) maxlength(400) required,
@@ -21,7 +20,6 @@ entity Course {
 }
 
 entity CourseCategory {
-   id Long required,
    title String minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH) required,
     logo String minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH) required
    isParent Boolean required,
@@ -30,37 +28,31 @@ entity CourseCategory {
 }
 
 entity CourseEnrollment {
-   id Long required,
    enrollementDate LocalDate required,
    lastAccessedDate LocalDate required,
 }
 
 entity CourseLevel {
-   id Long required,
    title String minlength(DEFAULT_MIN_LENGTH) maxlength(50),
    description String minlength(DEFAULT_MIN_LENGTH) maxlength(400)
 }
 
 entity CourseSessionProgress {
-   id Long required,
    watchSeconds Instant required
 }
 
 entity CourseAssignmentProgress {
-   id Long required,
    completed Boolean required,
    completedDate LocalDate
 }
 
 entity CourseReviewStatus{
-   id Long required,
    status Boolean required,
    statusUpdatedOn LocalDate,
    feedback String minlength(DEFAULT_MIN_LENGTH) maxlength(400)
 }
 
 entity CourseSection {
-   id Long required,
    sectionTitle String minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH) required,
    sectionDescription String minlength(DEFAULT_MIN_LENGTH) maxlength(400),
    sectionOrder Integer required,
@@ -69,7 +61,6 @@ entity CourseSection {
 }
 
 entity CourseSession {
-       id Long required,
        sessionTitle String minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH) required,
        sessionDescription String minlength(DEFAULT_MIN_LENGTH) maxlength(400),
        sessionVideo String minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH) required,
@@ -83,7 +74,6 @@ entity CourseSession {
 }
 
 entity CourseAssignment {
-       id Long required,
        assignmentTitle String minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH) required,
        assignmentDescription String minlength(DEFAULT_MIN_LENGTH) maxlength(400),
        assignmentOrder Integer required,
@@ -95,42 +85,39 @@ entity CourseAssignment {
 }
 
 entity CourseAssignmentInput{
-   id Long required,
-   input String maxlength(200)
+   input String maxlength(200) required
 }
 
 entity CourseAssignmentOutput{
-   id Long required,
-   output String maxlength(200)
+   output String maxlength(200) required
 }
 
 entity CourseType {
-   id Long required,
        title String maxlength(50) required,
        description String maxlength(100)
 }
 
 
 relationship ManyToOne {
-   Course{courseLevel(title)} to CourseLevel
-   Course{courseCategory(title)} to CourseCategory
-    Course{courseType(title)} to CourseType
-   Course{user(login)} to User
-   CourseSection{course(courseTitle)} to Course
-    CourseSession{courseSection(sectionTitle)} to CourseSection
-   CourseSessionProgress{user(login)} to User
-   CourseSessionProgress{courseSession(sessionTitle)} to CourseSession
-   CourseAssignment{courseSession(sessionTitle)} to CourseSession
-   CourseAssignmentProgress{user(login)} to User
-   CourseAssignmentProgress{courseAssignment(assignmentTitle)} to CourseAssignment
-    CourseEnrollment{user(login)} to User
-    CourseEnrollment{course} to Course
-    Course{user(login)} to User
-   CourseAssignmentInput{courseAssignment(assignmentTitle)} to CourseAssignment
-    CourseAssignmentInput{user(login)} to User
-   CourseAssignmentOutput{courseAssignment(assignmentTitle)} to CourseAssignment
-    CourseReviewStatus{user(login)} to User
-    CourseReviewStatus{courseSession(sessionTitle)} to CourseSession
+   Course{courseLevel(title) required} to CourseLevel
+   Course{courseCategory(title) required} to CourseCategory
+    Course{courseType(title) required} to CourseType
+   Course{user(login) required} to User
+   CourseSection{course(courseTitle) required} to Course
+    CourseSession{courseSection(sectionTitle) required} to CourseSection
+   CourseSessionProgress{user(login) required} to User
+   CourseSessionProgress{courseSession(sessionTitle) required} to CourseSession
+   CourseAssignment{courseSession(sessionTitle) required} to CourseSession
+   CourseAssignmentProgress{user(login) required} to User
+   CourseAssignmentProgress{courseAssignment(assignmentTitle) required} to CourseAssignment
+    CourseEnrollment{user(login) required} to User
+    CourseEnrollment{course(courseTitle) required} to Course
+    Course{user(login) required} to User
+   CourseAssignmentInput{courseAssignment(assignmentTitle) required} to CourseAssignment
+    CourseAssignmentInput{user(login) required} to User
+   CourseAssignmentOutput{courseAssignment(assignmentTitle) required} to CourseAssignment
+    CourseReviewStatus{user(login) required} to User
+    CourseReviewStatus{courseSession(sessionTitle) required} to CourseSession
 }
 
 

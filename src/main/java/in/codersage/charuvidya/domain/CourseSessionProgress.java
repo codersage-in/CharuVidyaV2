@@ -18,21 +18,22 @@ public class CourseSessionProgress implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @NotNull
     @Column(name = "watch_seconds", nullable = false)
     private Instant watchSeconds;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     private User user;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "courseSection", "courseReviewStatuses" }, allowSetters = true)
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties(value = { "courseSection" }, allowSetters = true)
     private CourseSession courseSession;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

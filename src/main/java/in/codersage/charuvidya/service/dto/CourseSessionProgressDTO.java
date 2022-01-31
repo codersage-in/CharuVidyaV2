@@ -10,7 +10,6 @@ import javax.validation.constraints.*;
  */
 public class CourseSessionProgressDTO implements Serializable {
 
-    @NotNull
     private Long id;
 
     @NotNull

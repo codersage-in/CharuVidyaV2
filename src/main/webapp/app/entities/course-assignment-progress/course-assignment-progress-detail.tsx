@@ -25,7 +25,7 @@ export const CourseAssignmentProgressDetail = (props: RouteComponentProps<{ id: 
         <dl className="jh-entity-details">
           <dt>
             <span id="id">
-              <Translate contentKey="charuVidyaApp.courseAssignmentProgress.id">Id</Translate>
+              <Translate contentKey="global.field.id">ID</Translate>
             </span>
           </dt>
           <dd>{courseAssignmentProgressEntity.id}</dd>
@@ -52,7 +52,7 @@ export const CourseAssignmentProgressDetail = (props: RouteComponentProps<{ id: 
           <dt>
             <Translate contentKey="charuVidyaApp.courseAssignmentProgress.courseAssignment">Course Assignment</Translate>
           </dt>
-          <dd>{courseAssignmentProgressEntity.courseAssignment ? courseAssignmentProgressEntity.courseAssignment.id : ''}</dd>
+          <dd>{courseAssignmentProgressEntity.courseAssignment ? courseAssignmentProgressEntity.courseAssignment.assignmentTitle : ''}</dd>
         </dl>
         <Button tag={Link} to="/course-assignment-progress" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

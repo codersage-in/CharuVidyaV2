@@ -6,8 +6,8 @@ export interface ICourseEnrollment {
   id?: number;
   enrollementDate?: string;
   lastAccessedDate?: string;
-  user?: IUser | null;
-  course?: ICourse | null;
+  user?: IUser;
+  course?: ICourse;
 }
 
 export const defaultValue: Readonly<ICourseEnrollment> = {};

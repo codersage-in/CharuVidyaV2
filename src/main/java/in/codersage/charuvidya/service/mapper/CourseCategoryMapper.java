@@ -9,8 +9,9 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface CourseCategoryMapper extends EntityMapper<CourseCategoryDTO, CourseCategory> {
-    @Named("id")
+    @Named("title")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    CourseCategoryDTO toDtoId(CourseCategory courseCategory);
+    @Mapping(target = "title", source = "title")
+    CourseCategoryDTO toDtoTitle(CourseCategory courseCategory);
 }

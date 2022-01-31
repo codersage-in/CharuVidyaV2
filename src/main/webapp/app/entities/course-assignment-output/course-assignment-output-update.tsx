@@ -87,7 +87,7 @@ export const CourseAssignmentOutputUpdate = (props: RouteComponentProps<{ id: st
                   required
                   readOnly
                   id="course-assignment-output-id"
-                  label={translate('charuVidyaApp.courseAssignmentOutput.id')}
+                  label={translate('global.field.id')}
                   validate={{ required: true }}
                 />
               ) : null}
@@ -107,16 +107,20 @@ export const CourseAssignmentOutputUpdate = (props: RouteComponentProps<{ id: st
                 data-cy="courseAssignment"
                 label={translate('charuVidyaApp.courseAssignmentOutput.courseAssignment')}
                 type="select"
+                required
               >
                 <option value="" key="0" />
                 {courseAssignments
                   ? courseAssignments.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.assignmentTitle}
                       </option>
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/course-assignment-output" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

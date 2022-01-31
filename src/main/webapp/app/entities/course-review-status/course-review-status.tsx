@@ -101,7 +101,7 @@ export const CourseReviewStatus = (props: RouteComponentProps<{ url: string }>) 
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="charuVidyaApp.courseReviewStatus.id">Id</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="charuVidyaApp.courseReviewStatus.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('status')}>
                   <Translate contentKey="charuVidyaApp.courseReviewStatus.status">Status</Translate> <FontAwesomeIcon icon="sort" />
@@ -131,17 +131,19 @@ export const CourseReviewStatus = (props: RouteComponentProps<{ url: string }>) 
                       {courseReviewStatus.id}
                     </Button>
                   </td>
-                  <td>{courseReviewStatus.status}</td>
+                  <td>{courseReviewStatus.status ? 'true' : 'false'}</td>
                   <td>
                     {courseReviewStatus.statusUpdatedOn ? (
                       <TextFormat type="date" value={courseReviewStatus.statusUpdatedOn} format={APP_LOCAL_DATE_FORMAT} />
                     ) : null}
                   </td>
                   <td>{courseReviewStatus.feedback}</td>
-                  <td>{courseReviewStatus.user ? courseReviewStatus.user.id : ''}</td>
+                  <td>{courseReviewStatus.user ? courseReviewStatus.user.login : ''}</td>
                   <td>
                     {courseReviewStatus.courseSession ? (
-                      <Link to={`course-session/${courseReviewStatus.courseSession.id}`}>{courseReviewStatus.courseSession.id}</Link>
+                      <Link to={`course-session/${courseReviewStatus.courseSession.id}`}>
+                        {courseReviewStatus.courseSession.sessionTitle}
+                      </Link>
                     ) : (
                       ''
                     )}

@@ -82,6 +82,16 @@ class CourseSectionResourceIT {
             .sectionOrder(DEFAULT_SECTION_ORDER)
             .isDraft(DEFAULT_IS_DRAFT)
             .isApproved(DEFAULT_IS_APPROVED);
+        // Add required entity
+        Course course;
+        if (TestUtil.findAll(em, Course.class).isEmpty()) {
+            course = CourseResourceIT.createEntity(em);
+            em.persist(course);
+            em.flush();
+        } else {
+            course = TestUtil.findAll(em, Course.class).get(0);
+        }
+        courseSection.setCourse(course);
         return courseSection;
     }
 
@@ -98,6 +108,16 @@ class CourseSectionResourceIT {
             .sectionOrder(UPDATED_SECTION_ORDER)
             .isDraft(UPDATED_IS_DRAFT)
             .isApproved(UPDATED_IS_APPROVED);
+        // Add required entity
+        Course course;
+        if (TestUtil.findAll(em, Course.class).isEmpty()) {
+            course = CourseResourceIT.createUpdatedEntity(em);
+            em.persist(course);
+            em.flush();
+        } else {
+            course = TestUtil.findAll(em, Course.class).get(0);
+        }
+        courseSection.setCourse(course);
         return courseSection;
     }
 

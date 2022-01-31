@@ -91,7 +91,7 @@ export const CourseReviewStatusUpdate = (props: RouteComponentProps<{ id: string
                   required
                   readOnly
                   id="course-review-status-id"
-                  label={translate('charuVidyaApp.courseReviewStatus.id')}
+                  label={translate('global.field.id')}
                   validate={{ required: true }}
                 />
               ) : null}
@@ -100,10 +100,8 @@ export const CourseReviewStatusUpdate = (props: RouteComponentProps<{ id: string
                 id="course-review-status-status"
                 name="status"
                 data-cy="status"
-                type="text"
-                validate={{
-                  maxLength: { value: 20, message: translate('entity.validation.maxlength', { max: 20 }) },
-                }}
+                check
+                type="checkbox"
               />
               <ValidatedField
                 label={translate('charuVidyaApp.courseReviewStatus.statusUpdatedOn')}
@@ -119,7 +117,8 @@ export const CourseReviewStatusUpdate = (props: RouteComponentProps<{ id: string
                 data-cy="feedback"
                 type="text"
                 validate={{
-                  maxLength: { value: 200, message: translate('entity.validation.maxlength', { max: 200 }) },
+                  minLength: { value: 10, message: translate('entity.validation.minlength', { min: 10 }) },
+                  maxLength: { value: 400, message: translate('entity.validation.maxlength', { max: 400 }) },
                 }}
               />
               <ValidatedField
@@ -128,32 +127,40 @@ export const CourseReviewStatusUpdate = (props: RouteComponentProps<{ id: string
                 data-cy="user"
                 label={translate('charuVidyaApp.courseReviewStatus.user')}
                 type="select"
+                required
               >
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.login}
                       </option>
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <ValidatedField
                 id="course-review-status-courseSession"
                 name="courseSession"
                 data-cy="courseSession"
                 label={translate('charuVidyaApp.courseReviewStatus.courseSession')}
                 type="select"
+                required
               >
                 <option value="" key="0" />
                 {courseSessions
                   ? courseSessions.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.sessionTitle}
                       </option>
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/course-review-status" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

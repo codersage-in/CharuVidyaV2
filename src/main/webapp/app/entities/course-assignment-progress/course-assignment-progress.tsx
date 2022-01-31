@@ -103,7 +103,7 @@ export const CourseAssignmentProgress = (props: RouteComponentProps<{ url: strin
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="charuVidyaApp.courseAssignmentProgress.id">Id</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="charuVidyaApp.courseAssignmentProgress.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('completed')}>
                   <Translate contentKey="charuVidyaApp.courseAssignmentProgress.completed">Completed</Translate>{' '}
@@ -141,7 +141,7 @@ export const CourseAssignmentProgress = (props: RouteComponentProps<{ url: strin
                   <td>
                     {courseAssignmentProgress.courseAssignment ? (
                       <Link to={`course-assignment/${courseAssignmentProgress.courseAssignment.id}`}>
-                        {courseAssignmentProgress.courseAssignment.id}
+                        {courseAssignmentProgress.courseAssignment.assignmentTitle}
                       </Link>
                     ) : (
                       ''

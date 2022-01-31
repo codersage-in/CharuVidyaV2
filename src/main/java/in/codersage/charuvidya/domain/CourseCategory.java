@@ -16,20 +16,19 @@ public class CourseCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @NotNull
-    @Size(max = 255)
-    @Column(name = "title", length = 255, nullable = false)
+    @Size(min = 10, max = 42)
+    @Column(name = "title", length = 42, nullable = false)
     private String title;
 
     @NotNull
-    @Size(max = 255)
-    @Column(name = "logo", length = 255, nullable = false)
+    @Size(min = 10, max = 42)
+    @Column(name = "logo", length = 42, nullable = false)
     private String logo;
 
     @NotNull
@@ -40,8 +39,8 @@ public class CourseCategory implements Serializable {
     @Column(name = "parent_id", nullable = false)
     private Integer parentId;
 
-    @Size(max = 100)
-    @Column(name = "description", length = 100)
+    @Size(min = 10, max = 400)
+    @Column(name = "description", length = 400)
     private String description;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

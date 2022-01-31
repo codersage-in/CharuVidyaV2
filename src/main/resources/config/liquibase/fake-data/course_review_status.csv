@@ -1,11 +1,11 @@
-id;status;status_updated_on;feedback
-1;Unbranded viral inte;2022-01-26;one-to-one Illinois bifurcated
-2;black Credit Intelli;2022-01-26;of Jewelery system
-3;Buckinghamshire Illi;2022-01-26;Ergonomic Bosnia
-4;IB;2022-01-25;Groves regional
-5;alarm;2022-01-25;Kyat Uruguay
-6;Frozen;2022-01-25;Facilitator red Vatu
-7;withdrawal;2022-01-25;Cliffs
-8;frictionless Identit;2022-01-26;Managed Mill
-9;Shoes;2022-01-26;Business-focused up
-10;Response;2022-01-26;Wyoming Movies
+id;status;status_updated_on;feedback;user_id;course_session_id
+1;true;2022-01-26;Berkshire technologies Director;1;1
+2;false;2022-01-26;Illinois bifurcated;2;2
+3;true;2022-01-26;bluetoothX;1;3
+4;false;2022-01-26;MinnesotaX;2;4
+5;true;2022-01-26;Jewelery system;1;5
+6;false;2022-01-26;Path Investment Ergonomic;1;6
+7;true;2022-01-26;Synergistic;1;7
+8;false;2022-01-25;Groves regional;1;8
+9;false;2022-01-26;Utah KyatX;1;9
+10;true;2022-01-25;Ergonomic Versatile Facilitator;1;10

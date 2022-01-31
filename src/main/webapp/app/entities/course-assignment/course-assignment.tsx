@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import { Translate, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getEntities } from './course-assignment.reducer';
@@ -101,7 +101,7 @@ export const CourseAssignment = (props: RouteComponentProps<{ url: string }>) =>
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="charuVidyaApp.courseAssignment.id">Id</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="charuVidyaApp.courseAssignment.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('assignmentTitle')}>
                   <Translate contentKey="charuVidyaApp.courseAssignment.assignmentTitle">Assignment Title</Translate>{' '}
@@ -109,14 +109,6 @@ export const CourseAssignment = (props: RouteComponentProps<{ url: string }>) =>
                 </th>
                 <th className="hand" onClick={sort('assignmentDescription')}>
                   <Translate contentKey="charuVidyaApp.courseAssignment.assignmentDescription">Assignment Description</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('sessionVideo')}>
-                  <Translate contentKey="charuVidyaApp.courseAssignment.sessionVideo">Session Video</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('sessionDuration')}>
-                  <Translate contentKey="charuVidyaApp.courseAssignment.sessionDuration">Session Duration</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('assignmentOrder')}>
@@ -141,7 +133,7 @@ export const CourseAssignment = (props: RouteComponentProps<{ url: string }>) =>
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="charuVidyaApp.courseAssignment.courseSection">Course Section</Translate>{' '}
+                  <Translate contentKey="charuVidyaApp.courseAssignment.courseSession">Course Session</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -157,12 +149,6 @@ export const CourseAssignment = (props: RouteComponentProps<{ url: string }>) =>
                   </td>
                   <td>{courseAssignment.assignmentTitle}</td>
                   <td>{courseAssignment.assignmentDescription}</td>
-                  <td>{courseAssignment.sessionVideo}</td>
-                  <td>
-                    {courseAssignment.sessionDuration ? (
-                      <TextFormat type="date" value={courseAssignment.sessionDuration} format={APP_DATE_FORMAT} />
-                    ) : null}
-                  </td>
                   <td>{courseAssignment.assignmentOrder}</td>
                   <td>{courseAssignment.assignmentResource}</td>
                   <td>{courseAssignment.isPreview ? 'true' : 'false'}</td>
@@ -170,8 +156,8 @@ export const CourseAssignment = (props: RouteComponentProps<{ url: string }>) =>
                   <td>{courseAssignment.isApproved ? 'true' : 'false'}</td>
                   <td>{courseAssignment.isPublished ? 'true' : 'false'}</td>
                   <td>
-                    {courseAssignment.courseSection ? (
-                      <Link to={`course-section/${courseAssignment.courseSection.id}`}>{courseAssignment.courseSection.sectionTitle}</Link>
+                    {courseAssignment.courseSession ? (
+                      <Link to={`course-session/${courseAssignment.courseSession.id}`}>{courseAssignment.courseSession.sessionTitle}</Link>
                     ) : (
                       ''
                     )}

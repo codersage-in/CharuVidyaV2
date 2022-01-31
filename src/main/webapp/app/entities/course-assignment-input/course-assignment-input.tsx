@@ -101,7 +101,7 @@ export const CourseAssignmentInput = (props: RouteComponentProps<{ url: string }
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="charuVidyaApp.courseAssignmentInput.id">Id</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="charuVidyaApp.courseAssignmentInput.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('input')}>
                   <Translate contentKey="charuVidyaApp.courseAssignmentInput.input">Input</Translate> <FontAwesomeIcon icon="sort" />
@@ -128,13 +128,13 @@ export const CourseAssignmentInput = (props: RouteComponentProps<{ url: string }
                   <td>
                     {courseAssignmentInput.courseAssignment ? (
                       <Link to={`course-assignment/${courseAssignmentInput.courseAssignment.id}`}>
-                        {courseAssignmentInput.courseAssignment.id}
+                        {courseAssignmentInput.courseAssignment.assignmentTitle}
                       </Link>
                     ) : (
                       ''
                     )}
                   </td>
-                  <td>{courseAssignmentInput.user ? courseAssignmentInput.user.id : ''}</td>
+                  <td>{courseAssignmentInput.user ? courseAssignmentInput.user.login : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button

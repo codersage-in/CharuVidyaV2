@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { Translate, TextFormat } from 'react-jhipster';
+import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { getEntity } from './course-assignment.reducer';
@@ -25,7 +25,7 @@ export const CourseAssignmentDetail = (props: RouteComponentProps<{ id: string }
         <dl className="jh-entity-details">
           <dt>
             <span id="id">
-              <Translate contentKey="charuVidyaApp.courseAssignment.id">Id</Translate>
+              <Translate contentKey="global.field.id">ID</Translate>
             </span>
           </dt>
           <dd>{courseAssignmentEntity.id}</dd>
@@ -41,22 +41,6 @@ export const CourseAssignmentDetail = (props: RouteComponentProps<{ id: string }
             </span>
           </dt>
           <dd>{courseAssignmentEntity.assignmentDescription}</dd>
-          <dt>
-            <span id="sessionVideo">
-              <Translate contentKey="charuVidyaApp.courseAssignment.sessionVideo">Session Video</Translate>
-            </span>
-          </dt>
-          <dd>{courseAssignmentEntity.sessionVideo}</dd>
-          <dt>
-            <span id="sessionDuration">
-              <Translate contentKey="charuVidyaApp.courseAssignment.sessionDuration">Session Duration</Translate>
-            </span>
-          </dt>
-          <dd>
-            {courseAssignmentEntity.sessionDuration ? (
-              <TextFormat value={courseAssignmentEntity.sessionDuration} type="date" format={APP_DATE_FORMAT} />
-            ) : null}
-          </dd>
           <dt>
             <span id="assignmentOrder">
               <Translate contentKey="charuVidyaApp.courseAssignment.assignmentOrder">Assignment Order</Translate>
@@ -94,9 +78,9 @@ export const CourseAssignmentDetail = (props: RouteComponentProps<{ id: string }
           </dt>
           <dd>{courseAssignmentEntity.isPublished ? 'true' : 'false'}</dd>
           <dt>
-            <Translate contentKey="charuVidyaApp.courseAssignment.courseSection">Course Section</Translate>
+            <Translate contentKey="charuVidyaApp.courseAssignment.courseSession">Course Session</Translate>
           </dt>
-          <dd>{courseAssignmentEntity.courseSection ? courseAssignmentEntity.courseSection.sectionTitle : ''}</dd>
+          <dd>{courseAssignmentEntity.courseSession ? courseAssignmentEntity.courseSession.sessionTitle : ''}</dd>
         </dl>
         <Button tag={Link} to="/course-assignment" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

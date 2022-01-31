@@ -101,7 +101,7 @@ export const CourseSessionProgress = (props: RouteComponentProps<{ url: string }
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="charuVidyaApp.courseSessionProgress.id">Id</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="charuVidyaApp.courseSessionProgress.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('watchSeconds')}>
                   <Translate contentKey="charuVidyaApp.courseSessionProgress.watchSeconds">Watch Seconds</Translate>{' '}
@@ -133,7 +133,9 @@ export const CourseSessionProgress = (props: RouteComponentProps<{ url: string }
                   <td>{courseSessionProgress.user ? courseSessionProgress.user.login : ''}</td>
                   <td>
                     {courseSessionProgress.courseSession ? (
-                      <Link to={`course-session/${courseSessionProgress.courseSession.id}`}>{courseSessionProgress.courseSession.id}</Link>
+                      <Link to={`course-session/${courseSessionProgress.courseSession.id}`}>
+                        {courseSessionProgress.courseSession.sessionTitle}
+                      </Link>
                     ) : (
                       ''
                     )}

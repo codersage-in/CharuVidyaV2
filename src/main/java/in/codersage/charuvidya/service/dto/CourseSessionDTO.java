@@ -10,18 +10,17 @@ import javax.validation.constraints.*;
  */
 public class CourseSessionDTO implements Serializable {
 
-    @NotNull
     private Long id;
 
     @NotNull
-    @Size(max = 255)
+    @Size(min = 10, max = 42)
     private String sessionTitle;
 
-    @Size(max = 255)
+    @Size(min = 10, max = 400)
     private String sessionDescription;
 
     @NotNull
-    @Size(max = 300)
+    @Size(min = 10, max = 42)
     private String sessionVideo;
 
     @NotNull
@@ -30,11 +29,8 @@ public class CourseSessionDTO implements Serializable {
     @NotNull
     private Integer sessionOrder;
 
-    @Size(max = 300)
+    @Size(min = 10, max = 42)
     private String sessionResource;
-
-    @Size(max = 300)
-    private String sessionQuiz;
 
     @NotNull
     private Boolean isPreview;
@@ -104,14 +100,6 @@ public class CourseSessionDTO implements Serializable {
 
     public void setSessionResource(String sessionResource) {
         this.sessionResource = sessionResource;
-    }
-
-    public String getSessionQuiz() {
-        return sessionQuiz;
-    }
-
-    public void setSessionQuiz(String sessionQuiz) {
-        this.sessionQuiz = sessionQuiz;
     }
 
     public Boolean getIsPreview() {
@@ -186,7 +174,6 @@ public class CourseSessionDTO implements Serializable {
             ", sessionDuration='" + getSessionDuration() + "'" +
             ", sessionOrder=" + getSessionOrder() +
             ", sessionResource='" + getSessionResource() + "'" +
-            ", sessionQuiz='" + getSessionQuiz() + "'" +
             ", isPreview='" + getIsPreview() + "'" +
             ", isDraft='" + getIsDraft() + "'" +
             ", isApproved='" + getIsApproved() + "'" +

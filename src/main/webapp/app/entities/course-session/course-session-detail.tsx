@@ -25,7 +25,7 @@ export const CourseSessionDetail = (props: RouteComponentProps<{ id: string }>) 
         <dl className="jh-entity-details">
           <dt>
             <span id="id">
-              <Translate contentKey="charuVidyaApp.courseSession.id">Id</Translate>
+              <Translate contentKey="global.field.id">ID</Translate>
             </span>
           </dt>
           <dd>{courseSessionEntity.id}</dd>
@@ -69,12 +69,6 @@ export const CourseSessionDetail = (props: RouteComponentProps<{ id: string }>) 
             </span>
           </dt>
           <dd>{courseSessionEntity.sessionResource}</dd>
-          <dt>
-            <span id="sessionQuiz">
-              <Translate contentKey="charuVidyaApp.courseSession.sessionQuiz">Session Quiz</Translate>
-            </span>
-          </dt>
-          <dd>{courseSessionEntity.sessionQuiz}</dd>
           <dt>
             <span id="isPreview">
               <Translate contentKey="charuVidyaApp.courseSession.isPreview">Is Preview</Translate>

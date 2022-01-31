@@ -17,7 +17,7 @@
       "detail": {
         "title": "Course Review Status"
       },
-      "id": "Id",
+      "id": "ID",
       "status": "Status",
       "statusUpdatedOn": "Status Updated On",
       "feedback": "Feedback",

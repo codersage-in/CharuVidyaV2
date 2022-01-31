@@ -1,11 +1,11 @@
-id;input
-1;Cheese Infrastructure up
-2;Market orchid
-3;Berkshire asynchronous Egypt
-4;cyan Solutions implement
-5;Planner
-6;Operations Security Generic
-7;Borders Sleek
-8;override RSS
-9;Handmade composite
-10;Salad Som Granite
+id;input;course_assignment_id;user_id
+1;Cheese Infrastructure up;1;1
+2;Market orchid;2;2
+3;Berkshire asynchronous Egypt;3;2
+4;cyan Solutions implement;4;1
+5;Planner;5;1
+6;Operations Security Generic;6;2
+7;Borders Sleek;7;2
+8;override RSS;8;1
+9;Handmade composite;9;1
+10;Salad Som Granite;10;1

@@ -25,7 +25,7 @@ export const CourseAssignmentInputDetail = (props: RouteComponentProps<{ id: str
         <dl className="jh-entity-details">
           <dt>
             <span id="id">
-              <Translate contentKey="charuVidyaApp.courseAssignmentInput.id">Id</Translate>
+              <Translate contentKey="global.field.id">ID</Translate>
             </span>
           </dt>
           <dd>{courseAssignmentInputEntity.id}</dd>
@@ -38,11 +38,11 @@ export const CourseAssignmentInputDetail = (props: RouteComponentProps<{ id: str
           <dt>
             <Translate contentKey="charuVidyaApp.courseAssignmentInput.courseAssignment">Course Assignment</Translate>
           </dt>
-          <dd>{courseAssignmentInputEntity.courseAssignment ? courseAssignmentInputEntity.courseAssignment.id : ''}</dd>
+          <dd>{courseAssignmentInputEntity.courseAssignment ? courseAssignmentInputEntity.courseAssignment.assignmentTitle : ''}</dd>
           <dt>
             <Translate contentKey="charuVidyaApp.courseAssignmentInput.user">User</Translate>
           </dt>
-          <dd>{courseAssignmentInputEntity.user ? courseAssignmentInputEntity.user.id : ''}</dd>
+          <dd>{courseAssignmentInputEntity.user ? courseAssignmentInputEntity.user.login : ''}</dd>
         </dl>
         <Button tag={Link} to="/course-assignment-input" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

@@ -74,6 +74,21 @@ class CourseEnrollmentResourceIT {
         CourseEnrollment courseEnrollment = new CourseEnrollment()
             .enrollementDate(DEFAULT_ENROLLEMENT_DATE)
             .lastAccessedDate(DEFAULT_LAST_ACCESSED_DATE);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        courseEnrollment.setUser(user);
+        // Add required entity
+        Course course;
+        if (TestUtil.findAll(em, Course.class).isEmpty()) {
+            course = CourseResourceIT.createEntity(em);
+            em.persist(course);
+            em.flush();
+        } else {
+            course = TestUtil.findAll(em, Course.class).get(0);
+        }
+        courseEnrollment.setCourse(course);
         return courseEnrollment;
     }
 
@@ -87,6 +102,21 @@ class CourseEnrollmentResourceIT {
         CourseEnrollment courseEnrollment = new CourseEnrollment()
             .enrollementDate(UPDATED_ENROLLEMENT_DATE)
             .lastAccessedDate(UPDATED_LAST_ACCESSED_DATE);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        courseEnrollment.setUser(user);
+        // Add required entity
+        Course course;
+        if (TestUtil.findAll(em, Course.class).isEmpty()) {
+            course = CourseResourceIT.createUpdatedEntity(em);
+            em.persist(course);
+            em.flush();
+        } else {
+            course = TestUtil.findAll(em, Course.class).get(0);
+        }
+        courseEnrollment.setCourse(course);
         return courseEnrollment;
     }
 

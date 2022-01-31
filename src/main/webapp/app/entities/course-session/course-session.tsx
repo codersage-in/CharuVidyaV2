@@ -101,7 +101,7 @@ export const CourseSession = (props: RouteComponentProps<{ url: string }>) => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="charuVidyaApp.courseSession.id">Id</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="charuVidyaApp.courseSession.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('sessionTitle')}>
                   <Translate contentKey="charuVidyaApp.courseSession.sessionTitle">Session Title</Translate> <FontAwesomeIcon icon="sort" />
@@ -123,9 +123,6 @@ export const CourseSession = (props: RouteComponentProps<{ url: string }>) => {
                 <th className="hand" onClick={sort('sessionResource')}>
                   <Translate contentKey="charuVidyaApp.courseSession.sessionResource">Session Resource</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('sessionQuiz')}>
-                  <Translate contentKey="charuVidyaApp.courseSession.sessionQuiz">Session Quiz</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('isPreview')}>
                   <Translate contentKey="charuVidyaApp.courseSession.isPreview">Is Preview</Translate> <FontAwesomeIcon icon="sort" />
@@ -164,7 +161,6 @@ export const CourseSession = (props: RouteComponentProps<{ url: string }>) => {
                   </td>
                   <td>{courseSession.sessionOrder}</td>
                   <td>{courseSession.sessionResource}</td>
-                  <td>{courseSession.sessionQuiz}</td>
                   <td>{courseSession.isPreview ? 'true' : 'false'}</td>
                   <td>{courseSession.isDraft ? 'true' : 'false'}</td>
                   <td>{courseSession.isApproved ? 'true' : 'false'}</td>

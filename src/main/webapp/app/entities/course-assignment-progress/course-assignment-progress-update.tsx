@@ -93,7 +93,7 @@ export const CourseAssignmentProgressUpdate = (props: RouteComponentProps<{ id: 
                   required
                   readOnly
                   id="course-assignment-progress-id"
-                  label={translate('charuVidyaApp.courseAssignmentProgress.id')}
+                  label={translate('global.field.id')}
                   validate={{ required: true }}
                 />
               ) : null}
@@ -118,6 +118,7 @@ export const CourseAssignmentProgressUpdate = (props: RouteComponentProps<{ id: 
                 data-cy="user"
                 label={translate('charuVidyaApp.courseAssignmentProgress.user')}
                 type="select"
+                required
               >
                 <option value="" key="0" />
                 {users
@@ -128,22 +129,29 @@ export const CourseAssignmentProgressUpdate = (props: RouteComponentProps<{ id: 
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <ValidatedField
                 id="course-assignment-progress-courseAssignment"
                 name="courseAssignment"
                 data-cy="courseAssignment"
                 label={translate('charuVidyaApp.courseAssignmentProgress.courseAssignment')}
                 type="select"
+                required
               >
                 <option value="" key="0" />
                 {courseAssignments
                   ? courseAssignments.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.assignmentTitle}
                       </option>
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/course-assignment-progress" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

@@ -6,8 +6,8 @@ export interface ICourseAssignmentProgress {
   id?: number;
   completed?: boolean;
   completedDate?: string | null;
-  user?: IUser | null;
-  courseAssignment?: ICourseAssignment | null;
+  user?: IUser;
+  courseAssignment?: ICourseAssignment;
 }
 
 export const defaultValue: Readonly<ICourseAssignmentProgress> = {

@@ -9,14 +9,13 @@ import javax.validation.constraints.*;
  */
 public class CourseSectionDTO implements Serializable {
 
-    @NotNull
     private Long id;
 
     @NotNull
-    @Size(max = 255)
+    @Size(min = 10, max = 42)
     private String sectionTitle;
 
-    @Size(max = 255)
+    @Size(min = 10, max = 400)
     private String sectionDescription;
 
     @NotNull

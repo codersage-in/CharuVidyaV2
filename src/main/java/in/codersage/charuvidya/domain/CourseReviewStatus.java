@@ -18,28 +18,29 @@ public class CourseReviewStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
-    @Size(max = 20)
-    @Column(name = "status", length = 20)
-    private String status;
+    @NotNull
+    @Column(name = "status", nullable = false)
+    private Boolean status;
 
     @Column(name = "status_updated_on")
     private LocalDate statusUpdatedOn;
 
-    @Size(max = 200)
-    @Column(name = "feedback", length = 200)
+    @Size(min = 10, max = 400)
+    @Column(name = "feedback", length = 400)
     private String feedback;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     private User user;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "courseSection", "courseReviewStatuses" }, allowSetters = true)
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties(value = { "courseSection" }, allowSetters = true)
     private CourseSession courseSession;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -57,16 +58,16 @@ public class CourseReviewStatus implements Serializable {
         this.id = id;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return this.status;
     }
 
-    public CourseReviewStatus status(String status) {
+    public CourseReviewStatus status(Boolean status) {
         this.setStatus(status);
         return this;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

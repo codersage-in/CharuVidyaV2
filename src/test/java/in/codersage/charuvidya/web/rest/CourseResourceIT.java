@@ -131,6 +131,41 @@ class CourseResourceIT {
             .isApproved(DEFAULT_IS_APPROVED)
             .isPublished(DEFAULT_IS_PUBLISHED)
             .courseApprovalDate(DEFAULT_COURSE_APPROVAL_DATE);
+        // Add required entity
+        CourseLevel courseLevel;
+        if (TestUtil.findAll(em, CourseLevel.class).isEmpty()) {
+            courseLevel = CourseLevelResourceIT.createEntity(em);
+            em.persist(courseLevel);
+            em.flush();
+        } else {
+            courseLevel = TestUtil.findAll(em, CourseLevel.class).get(0);
+        }
+        course.setCourseLevel(courseLevel);
+        // Add required entity
+        CourseCategory courseCategory;
+        if (TestUtil.findAll(em, CourseCategory.class).isEmpty()) {
+            courseCategory = CourseCategoryResourceIT.createEntity(em);
+            em.persist(courseCategory);
+            em.flush();
+        } else {
+            courseCategory = TestUtil.findAll(em, CourseCategory.class).get(0);
+        }
+        course.setCourseCategory(courseCategory);
+        // Add required entity
+        CourseType courseType;
+        if (TestUtil.findAll(em, CourseType.class).isEmpty()) {
+            courseType = CourseTypeResourceIT.createEntity(em);
+            em.persist(courseType);
+            em.flush();
+        } else {
+            courseType = TestUtil.findAll(em, CourseType.class).get(0);
+        }
+        course.setCourseType(courseType);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        course.setUser(user);
         return course;
     }
 
@@ -157,6 +192,41 @@ class CourseResourceIT {
             .isApproved(UPDATED_IS_APPROVED)
             .isPublished(UPDATED_IS_PUBLISHED)
             .courseApprovalDate(UPDATED_COURSE_APPROVAL_DATE);
+        // Add required entity
+        CourseLevel courseLevel;
+        if (TestUtil.findAll(em, CourseLevel.class).isEmpty()) {
+            courseLevel = CourseLevelResourceIT.createUpdatedEntity(em);
+            em.persist(courseLevel);
+            em.flush();
+        } else {
+            courseLevel = TestUtil.findAll(em, CourseLevel.class).get(0);
+        }
+        course.setCourseLevel(courseLevel);
+        // Add required entity
+        CourseCategory courseCategory;
+        if (TestUtil.findAll(em, CourseCategory.class).isEmpty()) {
+            courseCategory = CourseCategoryResourceIT.createUpdatedEntity(em);
+            em.persist(courseCategory);
+            em.flush();
+        } else {
+            courseCategory = TestUtil.findAll(em, CourseCategory.class).get(0);
+        }
+        course.setCourseCategory(courseCategory);
+        // Add required entity
+        CourseType courseType;
+        if (TestUtil.findAll(em, CourseType.class).isEmpty()) {
+            courseType = CourseTypeResourceIT.createUpdatedEntity(em);
+            em.persist(courseType);
+            em.flush();
+        } else {
+            courseType = TestUtil.findAll(em, CourseType.class).get(0);
+        }
+        course.setCourseType(courseType);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        course.setUser(user);
         return course;
     }
 
@@ -239,6 +309,24 @@ class CourseResourceIT {
         int databaseSizeBeforeTest = courseRepository.findAll().size();
         // set the field null
         course.setCourseDescription(null);
+
+        // Create the Course, which fails.
+        CourseDTO courseDTO = courseMapper.toDto(course);
+
+        restCourseMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(courseDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Course> courseList = courseRepository.findAll();
+        assertThat(courseList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkCourseObjectivesIsRequired() throws Exception {
+        int databaseSizeBeforeTest = courseRepository.findAll().size();
+        // set the field null
+        course.setCourseObjectives(null);
 
         // Create the Course, which fails.
         CourseDTO courseDTO = courseMapper.toDto(course);
@@ -1777,32 +1865,6 @@ class CourseResourceIT {
 
         // Get all the courseList where user equals to (userId + 1)
         defaultCourseShouldNotBeFound("userId.equals=" + (userId + 1));
-    }
-
-    @Test
-    @Transactional
-    void getAllCoursesByReviewerIsEqualToSomething() throws Exception {
-        // Initialize the database
-        courseRepository.saveAndFlush(course);
-        User reviewer;
-        if (TestUtil.findAll(em, User.class).isEmpty()) {
-            reviewer = UserResourceIT.createEntity(em);
-            em.persist(reviewer);
-            em.flush();
-        } else {
-            reviewer = TestUtil.findAll(em, User.class).get(0);
-        }
-        em.persist(reviewer);
-        em.flush();
-        course.setReviewer(reviewer);
-        courseRepository.saveAndFlush(course);
-        Long reviewerId = reviewer.getId();
-
-        // Get all the courseList where reviewer equals to reviewerId
-        defaultCourseShouldBeFound("reviewerId.equals=" + reviewerId);
-
-        // Get all the courseList where reviewer equals to (reviewerId + 1)
-        defaultCourseShouldNotBeFound("reviewerId.equals=" + (reviewerId + 1));
     }
 
     /**

@@ -101,7 +101,7 @@ export const CourseSection = (props: RouteComponentProps<{ url: string }>) => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="charuVidyaApp.courseSection.id">Id</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="charuVidyaApp.courseSection.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('sectionTitle')}>
                   <Translate contentKey="charuVidyaApp.courseSection.sectionTitle">Section Title</Translate> <FontAwesomeIcon icon="sort" />

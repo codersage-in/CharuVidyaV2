@@ -6,11 +6,6 @@
   "entityTableName": "course_session_progress",
   "fields": [
     {
-      "fieldName": "id",
-      "fieldType": "Long",
-      "fieldValidateRules": ["required"]
-    },
-    {
       "fieldName": "watchSeconds",
       "fieldType": "Instant",
       "fieldValidateRules": ["required"]
@@ -27,13 +22,16 @@
       "otherEntityName": "user",
       "otherEntityRelationshipName": "courseSessionProgress",
       "relationshipName": "user",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     },
     {
+      "otherEntityField": "sessionTitle",
       "otherEntityName": "courseSession",
       "otherEntityRelationshipName": "courseSessionProgress",
       "relationshipName": "courseSession",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
   "service": "serviceImpl"

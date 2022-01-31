@@ -101,7 +101,7 @@ export const CourseLevel = (props: RouteComponentProps<{ url: string }>) => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="charuVidyaApp.courseLevel.id">Id</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="charuVidyaApp.courseLevel.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('title')}>
                   <Translate contentKey="charuVidyaApp.courseLevel.title">Title</Translate> <FontAwesomeIcon icon="sort" />

@@ -91,7 +91,7 @@ export const CourseEnrollmentUpdate = (props: RouteComponentProps<{ id: string }
                   required
                   readOnly
                   id="course-enrollment-id"
-                  label={translate('charuVidyaApp.courseEnrollment.id')}
+                  label={translate('global.field.id')}
                   validate={{ required: true }}
                 />
               ) : null}
@@ -121,6 +121,7 @@ export const CourseEnrollmentUpdate = (props: RouteComponentProps<{ id: string }
                 data-cy="user"
                 label={translate('charuVidyaApp.courseEnrollment.user')}
                 type="select"
+                required
               >
                 <option value="" key="0" />
                 {users
@@ -131,22 +132,29 @@ export const CourseEnrollmentUpdate = (props: RouteComponentProps<{ id: string }
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <ValidatedField
                 id="course-enrollment-course"
                 name="course"
                 data-cy="course"
                 label={translate('charuVidyaApp.courseEnrollment.course')}
                 type="select"
+                required
               >
                 <option value="" key="0" />
                 {courses
                   ? courses.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.courseTitle}
                       </option>
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/course-enrollment" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

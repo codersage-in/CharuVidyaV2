@@ -101,7 +101,7 @@ export const CourseEnrollment = (props: RouteComponentProps<{ url: string }>) =>
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="charuVidyaApp.courseEnrollment.id">Id</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="charuVidyaApp.courseEnrollment.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('enrollementDate')}>
                   <Translate contentKey="charuVidyaApp.courseEnrollment.enrollementDate">Enrollement Date</Translate>{' '}
@@ -140,7 +140,11 @@ export const CourseEnrollment = (props: RouteComponentProps<{ url: string }>) =>
                   </td>
                   <td>{courseEnrollment.user ? courseEnrollment.user.login : ''}</td>
                   <td>
-                    {courseEnrollment.course ? <Link to={`course/${courseEnrollment.course.id}`}>{courseEnrollment.course.id}</Link> : ''}
+                    {courseEnrollment.course ? (
+                      <Link to={`course/${courseEnrollment.course.id}`}>{courseEnrollment.course.courseTitle}</Link>
+                    ) : (
+                      ''
+                    )}
                   </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

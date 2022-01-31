@@ -18,10 +18,9 @@ public class CourseAssignmentProgress implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @NotNull
@@ -31,11 +30,13 @@ public class CourseAssignmentProgress implements Serializable {
     @Column(name = "completed_date")
     private LocalDate completedDate;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     private User user;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "courseSection", "courseAssignmentInputs", "courseAssignmentOutputs" }, allowSetters = true)
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties(value = { "courseSession" }, allowSetters = true)
     private CourseAssignment courseAssignment;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

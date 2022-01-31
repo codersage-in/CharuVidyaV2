@@ -1,11 +1,11 @@
-id;output
-1;SDD
-2;Outdoors Metal Account
-3;blockchains Buckinghamshire Computer
-4;content-based
-5;Cambridgeshire bus
-6;Silver
-7;value-added
-8;Overpass
-9;deposit Cotton Chicken
-10;EXE Computer
+id;output;course_assignment_id
+1;SDD;1
+2;Outdoors Metal Account;2
+3;blockchains Buckinghamshire Computer;3
+4;content-based;4
+5;Cambridgeshire bus;5
+6;Silver;6
+7;value-added;7
+8;Overpass;8
+9;deposit Cotton Chicken;9
+10;EXE Computer;10

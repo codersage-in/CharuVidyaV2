@@ -101,7 +101,7 @@ export const CourseAssignmentOutput = (props: RouteComponentProps<{ url: string 
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="charuVidyaApp.courseAssignmentOutput.id">Id</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="charuVidyaApp.courseAssignmentOutput.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('output')}>
                   <Translate contentKey="charuVidyaApp.courseAssignmentOutput.output">Output</Translate> <FontAwesomeIcon icon="sort" />
@@ -125,7 +125,7 @@ export const CourseAssignmentOutput = (props: RouteComponentProps<{ url: string 
                   <td>
                     {courseAssignmentOutput.courseAssignment ? (
                       <Link to={`course-assignment/${courseAssignmentOutput.courseAssignment.id}`}>
-                        {courseAssignmentOutput.courseAssignment.id}
+                        {courseAssignmentOutput.courseAssignment.assignmentTitle}
                       </Link>
                     ) : (
                       ''

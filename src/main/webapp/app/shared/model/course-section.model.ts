@@ -7,7 +7,7 @@ export interface ICourseSection {
   sectionOrder?: number;
   isDraft?: boolean;
   isApproved?: boolean;
-  course?: ICourse | null;
+  course?: ICourse;
 }
 
 export const defaultValue: Readonly<ICourseSection> = {

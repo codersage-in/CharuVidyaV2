@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import in.codersage.charuvidya.IntegrationTest;
-import in.codersage.charuvidya.domain.CourseReviewStatus;
 import in.codersage.charuvidya.domain.CourseSection;
 import in.codersage.charuvidya.domain.CourseSession;
 import in.codersage.charuvidya.repository.CourseSessionRepository;
@@ -55,9 +54,6 @@ class CourseSessionResourceIT {
     private static final String DEFAULT_SESSION_RESOURCE = "AAAAAAAAAA";
     private static final String UPDATED_SESSION_RESOURCE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_SESSION_QUIZ = "AAAAAAAAAA";
-    private static final String UPDATED_SESSION_QUIZ = "BBBBBBBBBB";
-
     private static final Boolean DEFAULT_IS_PREVIEW = false;
     private static final Boolean UPDATED_IS_PREVIEW = true;
 
@@ -104,11 +100,20 @@ class CourseSessionResourceIT {
             .sessionDuration(DEFAULT_SESSION_DURATION)
             .sessionOrder(DEFAULT_SESSION_ORDER)
             .sessionResource(DEFAULT_SESSION_RESOURCE)
-            .sessionQuiz(DEFAULT_SESSION_QUIZ)
             .isPreview(DEFAULT_IS_PREVIEW)
             .isDraft(DEFAULT_IS_DRAFT)
             .isApproved(DEFAULT_IS_APPROVED)
             .isPublished(DEFAULT_IS_PUBLISHED);
+        // Add required entity
+        CourseSection courseSection;
+        if (TestUtil.findAll(em, CourseSection.class).isEmpty()) {
+            courseSection = CourseSectionResourceIT.createEntity(em);
+            em.persist(courseSection);
+            em.flush();
+        } else {
+            courseSection = TestUtil.findAll(em, CourseSection.class).get(0);
+        }
+        courseSession.setCourseSection(courseSection);
         return courseSession;
     }
 
@@ -126,11 +131,20 @@ class CourseSessionResourceIT {
             .sessionDuration(UPDATED_SESSION_DURATION)
             .sessionOrder(UPDATED_SESSION_ORDER)
             .sessionResource(UPDATED_SESSION_RESOURCE)
-            .sessionQuiz(UPDATED_SESSION_QUIZ)
             .isPreview(UPDATED_IS_PREVIEW)
             .isDraft(UPDATED_IS_DRAFT)
             .isApproved(UPDATED_IS_APPROVED)
             .isPublished(UPDATED_IS_PUBLISHED);
+        // Add required entity
+        CourseSection courseSection;
+        if (TestUtil.findAll(em, CourseSection.class).isEmpty()) {
+            courseSection = CourseSectionResourceIT.createUpdatedEntity(em);
+            em.persist(courseSection);
+            em.flush();
+        } else {
+            courseSection = TestUtil.findAll(em, CourseSection.class).get(0);
+        }
+        courseSession.setCourseSection(courseSection);
         return courseSession;
     }
 
@@ -161,7 +175,6 @@ class CourseSessionResourceIT {
         assertThat(testCourseSession.getSessionDuration()).isEqualTo(DEFAULT_SESSION_DURATION);
         assertThat(testCourseSession.getSessionOrder()).isEqualTo(DEFAULT_SESSION_ORDER);
         assertThat(testCourseSession.getSessionResource()).isEqualTo(DEFAULT_SESSION_RESOURCE);
-        assertThat(testCourseSession.getSessionQuiz()).isEqualTo(DEFAULT_SESSION_QUIZ);
         assertThat(testCourseSession.getIsPreview()).isEqualTo(DEFAULT_IS_PREVIEW);
         assertThat(testCourseSession.getIsDraft()).isEqualTo(DEFAULT_IS_DRAFT);
         assertThat(testCourseSession.getIsApproved()).isEqualTo(DEFAULT_IS_APPROVED);
@@ -367,7 +380,6 @@ class CourseSessionResourceIT {
             .andExpect(jsonPath("$.[*].sessionDuration").value(hasItem(DEFAULT_SESSION_DURATION.toString())))
             .andExpect(jsonPath("$.[*].sessionOrder").value(hasItem(DEFAULT_SESSION_ORDER)))
             .andExpect(jsonPath("$.[*].sessionResource").value(hasItem(DEFAULT_SESSION_RESOURCE)))
-            .andExpect(jsonPath("$.[*].sessionQuiz").value(hasItem(DEFAULT_SESSION_QUIZ)))
             .andExpect(jsonPath("$.[*].isPreview").value(hasItem(DEFAULT_IS_PREVIEW.booleanValue())))
             .andExpect(jsonPath("$.[*].isDraft").value(hasItem(DEFAULT_IS_DRAFT.booleanValue())))
             .andExpect(jsonPath("$.[*].isApproved").value(hasItem(DEFAULT_IS_APPROVED.booleanValue())))
@@ -392,7 +404,6 @@ class CourseSessionResourceIT {
             .andExpect(jsonPath("$.sessionDuration").value(DEFAULT_SESSION_DURATION.toString()))
             .andExpect(jsonPath("$.sessionOrder").value(DEFAULT_SESSION_ORDER))
             .andExpect(jsonPath("$.sessionResource").value(DEFAULT_SESSION_RESOURCE))
-            .andExpect(jsonPath("$.sessionQuiz").value(DEFAULT_SESSION_QUIZ))
             .andExpect(jsonPath("$.isPreview").value(DEFAULT_IS_PREVIEW.booleanValue()))
             .andExpect(jsonPath("$.isDraft").value(DEFAULT_IS_DRAFT.booleanValue()))
             .andExpect(jsonPath("$.isApproved").value(DEFAULT_IS_APPROVED.booleanValue()))
@@ -887,84 +898,6 @@ class CourseSessionResourceIT {
 
     @Test
     @Transactional
-    void getAllCourseSessionsBySessionQuizIsEqualToSomething() throws Exception {
-        // Initialize the database
-        courseSessionRepository.saveAndFlush(courseSession);
-
-        // Get all the courseSessionList where sessionQuiz equals to DEFAULT_SESSION_QUIZ
-        defaultCourseSessionShouldBeFound("sessionQuiz.equals=" + DEFAULT_SESSION_QUIZ);
-
-        // Get all the courseSessionList where sessionQuiz equals to UPDATED_SESSION_QUIZ
-        defaultCourseSessionShouldNotBeFound("sessionQuiz.equals=" + UPDATED_SESSION_QUIZ);
-    }
-
-    @Test
-    @Transactional
-    void getAllCourseSessionsBySessionQuizIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        courseSessionRepository.saveAndFlush(courseSession);
-
-        // Get all the courseSessionList where sessionQuiz not equals to DEFAULT_SESSION_QUIZ
-        defaultCourseSessionShouldNotBeFound("sessionQuiz.notEquals=" + DEFAULT_SESSION_QUIZ);
-
-        // Get all the courseSessionList where sessionQuiz not equals to UPDATED_SESSION_QUIZ
-        defaultCourseSessionShouldBeFound("sessionQuiz.notEquals=" + UPDATED_SESSION_QUIZ);
-    }
-
-    @Test
-    @Transactional
-    void getAllCourseSessionsBySessionQuizIsInShouldWork() throws Exception {
-        // Initialize the database
-        courseSessionRepository.saveAndFlush(courseSession);
-
-        // Get all the courseSessionList where sessionQuiz in DEFAULT_SESSION_QUIZ or UPDATED_SESSION_QUIZ
-        defaultCourseSessionShouldBeFound("sessionQuiz.in=" + DEFAULT_SESSION_QUIZ + "," + UPDATED_SESSION_QUIZ);
-
-        // Get all the courseSessionList where sessionQuiz equals to UPDATED_SESSION_QUIZ
-        defaultCourseSessionShouldNotBeFound("sessionQuiz.in=" + UPDATED_SESSION_QUIZ);
-    }
-
-    @Test
-    @Transactional
-    void getAllCourseSessionsBySessionQuizIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        courseSessionRepository.saveAndFlush(courseSession);
-
-        // Get all the courseSessionList where sessionQuiz is not null
-        defaultCourseSessionShouldBeFound("sessionQuiz.specified=true");
-
-        // Get all the courseSessionList where sessionQuiz is null
-        defaultCourseSessionShouldNotBeFound("sessionQuiz.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllCourseSessionsBySessionQuizContainsSomething() throws Exception {
-        // Initialize the database
-        courseSessionRepository.saveAndFlush(courseSession);
-
-        // Get all the courseSessionList where sessionQuiz contains DEFAULT_SESSION_QUIZ
-        defaultCourseSessionShouldBeFound("sessionQuiz.contains=" + DEFAULT_SESSION_QUIZ);
-
-        // Get all the courseSessionList where sessionQuiz contains UPDATED_SESSION_QUIZ
-        defaultCourseSessionShouldNotBeFound("sessionQuiz.contains=" + UPDATED_SESSION_QUIZ);
-    }
-
-    @Test
-    @Transactional
-    void getAllCourseSessionsBySessionQuizNotContainsSomething() throws Exception {
-        // Initialize the database
-        courseSessionRepository.saveAndFlush(courseSession);
-
-        // Get all the courseSessionList where sessionQuiz does not contain DEFAULT_SESSION_QUIZ
-        defaultCourseSessionShouldNotBeFound("sessionQuiz.doesNotContain=" + DEFAULT_SESSION_QUIZ);
-
-        // Get all the courseSessionList where sessionQuiz does not contain UPDATED_SESSION_QUIZ
-        defaultCourseSessionShouldBeFound("sessionQuiz.doesNotContain=" + UPDATED_SESSION_QUIZ);
-    }
-
-    @Test
-    @Transactional
     void getAllCourseSessionsByIsPreviewIsEqualToSomething() throws Exception {
         // Initialize the database
         courseSessionRepository.saveAndFlush(courseSession);
@@ -1197,32 +1130,6 @@ class CourseSessionResourceIT {
         defaultCourseSessionShouldNotBeFound("courseSectionId.equals=" + (courseSectionId + 1));
     }
 
-    @Test
-    @Transactional
-    void getAllCourseSessionsByCourseReviewStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        courseSessionRepository.saveAndFlush(courseSession);
-        CourseReviewStatus courseReviewStatus;
-        if (TestUtil.findAll(em, CourseReviewStatus.class).isEmpty()) {
-            courseReviewStatus = CourseReviewStatusResourceIT.createEntity(em);
-            em.persist(courseReviewStatus);
-            em.flush();
-        } else {
-            courseReviewStatus = TestUtil.findAll(em, CourseReviewStatus.class).get(0);
-        }
-        em.persist(courseReviewStatus);
-        em.flush();
-        courseSession.addCourseReviewStatus(courseReviewStatus);
-        courseSessionRepository.saveAndFlush(courseSession);
-        Long courseReviewStatusId = courseReviewStatus.getId();
-
-        // Get all the courseSessionList where courseReviewStatus equals to courseReviewStatusId
-        defaultCourseSessionShouldBeFound("courseReviewStatusId.equals=" + courseReviewStatusId);
-
-        // Get all the courseSessionList where courseReviewStatus equals to (courseReviewStatusId + 1)
-        defaultCourseSessionShouldNotBeFound("courseReviewStatusId.equals=" + (courseReviewStatusId + 1));
-    }
-
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -1238,7 +1145,6 @@ class CourseSessionResourceIT {
             .andExpect(jsonPath("$.[*].sessionDuration").value(hasItem(DEFAULT_SESSION_DURATION.toString())))
             .andExpect(jsonPath("$.[*].sessionOrder").value(hasItem(DEFAULT_SESSION_ORDER)))
             .andExpect(jsonPath("$.[*].sessionResource").value(hasItem(DEFAULT_SESSION_RESOURCE)))
-            .andExpect(jsonPath("$.[*].sessionQuiz").value(hasItem(DEFAULT_SESSION_QUIZ)))
             .andExpect(jsonPath("$.[*].isPreview").value(hasItem(DEFAULT_IS_PREVIEW.booleanValue())))
             .andExpect(jsonPath("$.[*].isDraft").value(hasItem(DEFAULT_IS_DRAFT.booleanValue())))
             .andExpect(jsonPath("$.[*].isApproved").value(hasItem(DEFAULT_IS_APPROVED.booleanValue())))
@@ -1297,7 +1203,6 @@ class CourseSessionResourceIT {
             .sessionDuration(UPDATED_SESSION_DURATION)
             .sessionOrder(UPDATED_SESSION_ORDER)
             .sessionResource(UPDATED_SESSION_RESOURCE)
-            .sessionQuiz(UPDATED_SESSION_QUIZ)
             .isPreview(UPDATED_IS_PREVIEW)
             .isDraft(UPDATED_IS_DRAFT)
             .isApproved(UPDATED_IS_APPROVED)
@@ -1322,7 +1227,6 @@ class CourseSessionResourceIT {
         assertThat(testCourseSession.getSessionDuration()).isEqualTo(UPDATED_SESSION_DURATION);
         assertThat(testCourseSession.getSessionOrder()).isEqualTo(UPDATED_SESSION_ORDER);
         assertThat(testCourseSession.getSessionResource()).isEqualTo(UPDATED_SESSION_RESOURCE);
-        assertThat(testCourseSession.getSessionQuiz()).isEqualTo(UPDATED_SESSION_QUIZ);
         assertThat(testCourseSession.getIsPreview()).isEqualTo(UPDATED_IS_PREVIEW);
         assertThat(testCourseSession.getIsDraft()).isEqualTo(UPDATED_IS_DRAFT);
         assertThat(testCourseSession.getIsApproved()).isEqualTo(UPDATED_IS_APPROVED);
@@ -1412,7 +1316,7 @@ class CourseSessionResourceIT {
             .sessionTitle(UPDATED_SESSION_TITLE)
             .sessionDuration(UPDATED_SESSION_DURATION)
             .sessionResource(UPDATED_SESSION_RESOURCE)
-            .isDraft(UPDATED_IS_DRAFT);
+            .isApproved(UPDATED_IS_APPROVED);
 
         restCourseSessionMockMvc
             .perform(
@@ -1432,10 +1336,9 @@ class CourseSessionResourceIT {
         assertThat(testCourseSession.getSessionDuration()).isEqualTo(UPDATED_SESSION_DURATION);
         assertThat(testCourseSession.getSessionOrder()).isEqualTo(DEFAULT_SESSION_ORDER);
         assertThat(testCourseSession.getSessionResource()).isEqualTo(UPDATED_SESSION_RESOURCE);
-        assertThat(testCourseSession.getSessionQuiz()).isEqualTo(DEFAULT_SESSION_QUIZ);
         assertThat(testCourseSession.getIsPreview()).isEqualTo(DEFAULT_IS_PREVIEW);
-        assertThat(testCourseSession.getIsDraft()).isEqualTo(UPDATED_IS_DRAFT);
-        assertThat(testCourseSession.getIsApproved()).isEqualTo(DEFAULT_IS_APPROVED);
+        assertThat(testCourseSession.getIsDraft()).isEqualTo(DEFAULT_IS_DRAFT);
+        assertThat(testCourseSession.getIsApproved()).isEqualTo(UPDATED_IS_APPROVED);
         assertThat(testCourseSession.getIsPublished()).isEqualTo(DEFAULT_IS_PUBLISHED);
     }
 
@@ -1458,7 +1361,6 @@ class CourseSessionResourceIT {
             .sessionDuration(UPDATED_SESSION_DURATION)
             .sessionOrder(UPDATED_SESSION_ORDER)
             .sessionResource(UPDATED_SESSION_RESOURCE)
-            .sessionQuiz(UPDATED_SESSION_QUIZ)
             .isPreview(UPDATED_IS_PREVIEW)
             .isDraft(UPDATED_IS_DRAFT)
             .isApproved(UPDATED_IS_APPROVED)
@@ -1482,7 +1384,6 @@ class CourseSessionResourceIT {
         assertThat(testCourseSession.getSessionDuration()).isEqualTo(UPDATED_SESSION_DURATION);
         assertThat(testCourseSession.getSessionOrder()).isEqualTo(UPDATED_SESSION_ORDER);
         assertThat(testCourseSession.getSessionResource()).isEqualTo(UPDATED_SESSION_RESOURCE);
-        assertThat(testCourseSession.getSessionQuiz()).isEqualTo(UPDATED_SESSION_QUIZ);
         assertThat(testCourseSession.getIsPreview()).isEqualTo(UPDATED_IS_PREVIEW);
         assertThat(testCourseSession.getIsDraft()).isEqualTo(UPDATED_IS_DRAFT);
         assertThat(testCourseSession.getIsApproved()).isEqualTo(UPDATED_IS_APPROVED);

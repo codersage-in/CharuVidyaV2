@@ -17,18 +17,18 @@ public class CourseAssignmentOutput implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @Size(max = 200)
     @Column(name = "output", length = 200)
     private String output;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "courseSection", "courseAssignmentInputs", "courseAssignmentOutputs" }, allowSetters = true)
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties(value = { "courseSession" }, allowSetters = true)
     private CourseAssignment courseAssignment;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

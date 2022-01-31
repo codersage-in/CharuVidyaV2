@@ -5,8 +5,8 @@ import { ICourseSession } from 'app/shared/model/course-session.model';
 export interface ICourseSessionProgress {
   id?: number;
   watchSeconds?: string;
-  user?: IUser | null;
-  courseSession?: ICourseSession | null;
+  user?: IUser;
+  courseSession?: ICourseSession;
 }
 
 export const defaultValue: Readonly<ICourseSessionProgress> = {};

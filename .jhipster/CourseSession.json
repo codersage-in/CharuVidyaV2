@@ -6,27 +6,25 @@
   "entityTableName": "course_session",
   "fields": [
     {
-      "fieldName": "id",
-      "fieldType": "Long",
-      "fieldValidateRules": ["required"]
-    },
-    {
       "fieldName": "sessionTitle",
       "fieldType": "String",
-      "fieldValidateRules": ["maxlength", "required"],
-      "fieldValidateRulesMaxlength": "255"
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "42",
+      "fieldValidateRulesMinlength": "10"
     },
     {
       "fieldName": "sessionDescription",
       "fieldType": "String",
-      "fieldValidateRules": ["maxlength"],
-      "fieldValidateRulesMaxlength": "255"
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "400",
+      "fieldValidateRulesMinlength": "10"
     },
     {
       "fieldName": "sessionVideo",
       "fieldType": "String",
-      "fieldValidateRules": ["maxlength", "required"],
-      "fieldValidateRulesMaxlength": "300"
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "42",
+      "fieldValidateRulesMinlength": "10"
     },
     {
       "fieldName": "sessionDuration",
@@ -41,14 +39,9 @@
     {
       "fieldName": "sessionResource",
       "fieldType": "String",
-      "fieldValidateRules": ["maxlength"],
-      "fieldValidateRulesMaxlength": "300"
-    },
-    {
-      "fieldName": "sessionQuiz",
-      "fieldType": "String",
-      "fieldValidateRules": ["maxlength"],
-      "fieldValidateRulesMaxlength": "300"
+      "fieldValidateRules": ["minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "42",
+      "fieldValidateRulesMinlength": "10"
     },
     {
       "fieldName": "isPreview",
@@ -82,13 +75,8 @@
       "otherEntityName": "courseSection",
       "otherEntityRelationshipName": "courseSession",
       "relationshipName": "courseSection",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "courseReviewStatus",
-      "otherEntityRelationshipName": "courseSession",
-      "relationshipName": "courseReviewStatus",
-      "relationshipType": "one-to-many"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
   "service": "serviceImpl"

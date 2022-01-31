@@ -93,7 +93,7 @@ export const CourseAssignmentInputUpdate = (props: RouteComponentProps<{ id: str
                   required
                   readOnly
                   id="course-assignment-input-id"
-                  label={translate('charuVidyaApp.courseAssignmentInput.id')}
+                  label={translate('global.field.id')}
                   validate={{ required: true }}
                 />
               ) : null}
@@ -113,32 +113,40 @@ export const CourseAssignmentInputUpdate = (props: RouteComponentProps<{ id: str
                 data-cy="courseAssignment"
                 label={translate('charuVidyaApp.courseAssignmentInput.courseAssignment')}
                 type="select"
+                required
               >
                 <option value="" key="0" />
                 {courseAssignments
                   ? courseAssignments.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.assignmentTitle}
                       </option>
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <ValidatedField
                 id="course-assignment-input-user"
                 name="user"
                 data-cy="user"
                 label={translate('charuVidyaApp.courseAssignmentInput.user')}
                 type="select"
+                required
               >
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.login}
                       </option>
                     ))
                   : null}
               </ValidatedField>
+              <FormText>
+                <Translate contentKey="entity.validation.required">This field is required.</Translate>
+              </FormText>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/course-assignment-input" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

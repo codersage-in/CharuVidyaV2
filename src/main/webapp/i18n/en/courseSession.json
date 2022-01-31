@@ -17,20 +17,18 @@
       "detail": {
         "title": "Course Session"
       },
-      "id": "Id",
+      "id": "ID",
       "sessionTitle": "Session Title",
       "sessionDescription": "Session Description",
       "sessionVideo": "Session Video",
       "sessionDuration": "Session Duration",
       "sessionOrder": "Session Order",
       "sessionResource": "Session Resource",
-      "sessionQuiz": "Session Quiz",
       "isPreview": "Is Preview",
       "isDraft": "Is Draft",
       "isApproved": "Is Approved",
       "isPublished": "Is Published",
-      "courseSection": "Course Section",
-      "courseReviewStatus": "Course Review Status"
+      "courseSection": "Course Section"
     }
   }
 }

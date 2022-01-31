@@ -18,10 +18,9 @@ public class CourseEnrollment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @NotNull
@@ -32,11 +31,13 @@ public class CourseEnrollment implements Serializable {
     @Column(name = "last_accessed_date", nullable = false)
     private LocalDate lastAccessedDate;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     private User user;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "courseLevel", "courseCategory", "courseType", "user", "reviewer" }, allowSetters = true)
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties(value = { "courseLevel", "courseCategory", "courseType", "user" }, allowSetters = true)
     private Course course;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

@@ -9,7 +9,6 @@ import javax.validation.constraints.*;
  */
 public class CourseAssignmentInputDTO implements Serializable {
 
-    @NotNull
     private Long id;
 
     @Size(max = 200)

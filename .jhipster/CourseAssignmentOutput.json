@@ -6,11 +6,6 @@
   "entityTableName": "course_assignment_output",
   "fields": [
     {
-      "fieldName": "id",
-      "fieldType": "Long",
-      "fieldValidateRules": ["required"]
-    },
-    {
       "fieldName": "output",
       "fieldType": "String",
       "fieldValidateRules": ["maxlength"],
@@ -24,10 +19,12 @@
   "readOnly": false,
   "relationships": [
     {
+      "otherEntityField": "assignmentTitle",
       "otherEntityName": "courseAssignment",
       "otherEntityRelationshipName": "courseAssignmentOutput",
       "relationshipName": "courseAssignment",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
   "service": "serviceImpl"

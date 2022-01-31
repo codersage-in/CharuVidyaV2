@@ -6,11 +6,6 @@
   "entityTableName": "course_assignment_progress",
   "fields": [
     {
-      "fieldName": "id",
-      "fieldType": "Long",
-      "fieldValidateRules": ["required"]
-    },
-    {
       "fieldName": "completed",
       "fieldType": "Boolean",
       "fieldValidateRules": ["required"]
@@ -31,13 +26,16 @@
       "otherEntityName": "user",
       "otherEntityRelationshipName": "courseAssignmentProgress",
       "relationshipName": "user",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     },
     {
+      "otherEntityField": "assignmentTitle",
       "otherEntityName": "courseAssignment",
       "otherEntityRelationshipName": "courseAssignmentProgress",
       "relationshipName": "courseAssignment",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
     }
   ],
   "service": "serviceImpl"

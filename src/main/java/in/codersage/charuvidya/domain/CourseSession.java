@@ -3,8 +3,6 @@ package in.codersage.charuvidya.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -20,24 +18,23 @@ public class CourseSession implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @NotNull
-    @Size(max = 255)
-    @Column(name = "session_title", length = 255, nullable = false)
+    @Size(min = 10, max = 42)
+    @Column(name = "session_title", length = 42, nullable = false)
     private String sessionTitle;
 
-    @Size(max = 255)
-    @Column(name = "session_description", length = 255)
+    @Size(min = 10, max = 400)
+    @Column(name = "session_description", length = 400)
     private String sessionDescription;
 
     @NotNull
-    @Size(max = 300)
-    @Column(name = "session_video", length = 300, nullable = false)
+    @Size(min = 10, max = 42)
+    @Column(name = "session_video", length = 42, nullable = false)
     private String sessionVideo;
 
     @NotNull
@@ -48,13 +45,9 @@ public class CourseSession implements Serializable {
     @Column(name = "session_order", nullable = false)
     private Integer sessionOrder;
 
-    @Size(max = 300)
-    @Column(name = "session_resource", length = 300)
+    @Size(min = 10, max = 42)
+    @Column(name = "session_resource", length = 42)
     private String sessionResource;
-
-    @Size(max = 300)
-    @Column(name = "session_quiz", length = 300)
-    private String sessionQuiz;
 
     @NotNull
     @Column(name = "is_preview", nullable = false)
@@ -72,14 +65,10 @@ public class CourseSession implements Serializable {
     @Column(name = "is_published", nullable = false)
     private Boolean isPublished;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = { "course" }, allowSetters = true)
     private CourseSection courseSection;
-
-    @OneToMany(mappedBy = "courseSession")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "user", "courseSession" }, allowSetters = true)
-    private Set<CourseReviewStatus> courseReviewStatuses = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -174,19 +163,6 @@ public class CourseSession implements Serializable {
         this.sessionResource = sessionResource;
     }
 
-    public String getSessionQuiz() {
-        return this.sessionQuiz;
-    }
-
-    public CourseSession sessionQuiz(String sessionQuiz) {
-        this.setSessionQuiz(sessionQuiz);
-        return this;
-    }
-
-    public void setSessionQuiz(String sessionQuiz) {
-        this.sessionQuiz = sessionQuiz;
-    }
-
     public Boolean getIsPreview() {
         return this.isPreview;
     }
@@ -252,37 +228,6 @@ public class CourseSession implements Serializable {
         return this;
     }
 
-    public Set<CourseReviewStatus> getCourseReviewStatuses() {
-        return this.courseReviewStatuses;
-    }
-
-    public void setCourseReviewStatuses(Set<CourseReviewStatus> courseReviewStatuses) {
-        if (this.courseReviewStatuses != null) {
-            this.courseReviewStatuses.forEach(i -> i.setCourseSession(null));
-        }
-        if (courseReviewStatuses != null) {
-            courseReviewStatuses.forEach(i -> i.setCourseSession(this));
-        }
-        this.courseReviewStatuses = courseReviewStatuses;
-    }
-
-    public CourseSession courseReviewStatuses(Set<CourseReviewStatus> courseReviewStatuses) {
-        this.setCourseReviewStatuses(courseReviewStatuses);
-        return this;
-    }
-
-    public CourseSession addCourseReviewStatus(CourseReviewStatus courseReviewStatus) {
-        this.courseReviewStatuses.add(courseReviewStatus);
-        courseReviewStatus.setCourseSession(this);
-        return this;
-    }
-
-    public CourseSession removeCourseReviewStatus(CourseReviewStatus courseReviewStatus) {
-        this.courseReviewStatuses.remove(courseReviewStatus);
-        courseReviewStatus.setCourseSession(null);
-        return this;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -313,7 +258,6 @@ public class CourseSession implements Serializable {
             ", sessionDuration='" + getSessionDuration() + "'" +
             ", sessionOrder=" + getSessionOrder() +
             ", sessionResource='" + getSessionResource() + "'" +
-            ", sessionQuiz='" + getSessionQuiz() + "'" +
             ", isPreview='" + getIsPreview() + "'" +
             ", isDraft='" + getIsDraft() + "'" +
             ", isApproved='" + getIsApproved() + "'" +

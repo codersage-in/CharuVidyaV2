@@ -10,6 +10,6 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = { UserMapper.class, CourseMapper.class })
 public interface CourseEnrollmentMapper extends EntityMapper<CourseEnrollmentDTO, CourseEnrollment> {
     @Mapping(target = "user", source = "user", qualifiedByName = "login")
-    @Mapping(target = "course", source = "course", qualifiedByName = "id")
+    @Mapping(target = "course", source = "course", qualifiedByName = "courseTitle")
     CourseEnrollmentDTO toDto(CourseEnrollment s);
 }

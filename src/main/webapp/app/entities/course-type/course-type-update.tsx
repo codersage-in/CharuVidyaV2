@@ -78,7 +78,7 @@ export const CourseTypeUpdate = (props: RouteComponentProps<{ id: string }>) => 
                   required
                   readOnly
                   id="course-type-id"
-                  label={translate('charuVidyaApp.courseType.id')}
+                  label={translate('global.field.id')}
                   validate={{ required: true }}
                 />
               ) : null}

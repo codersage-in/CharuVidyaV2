@@ -25,7 +25,7 @@ export const CourseDetail = (props: RouteComponentProps<{ id: string }>) => {
         <dl className="jh-entity-details">
           <dt>
             <span id="id">
-              <Translate contentKey="charuVidyaApp.course.id">Id</Translate>
+              <Translate contentKey="global.field.id">ID</Translate>
             </span>
           </dt>
           <dd>{courseEntity.id}</dd>
@@ -134,23 +134,19 @@ export const CourseDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dt>
             <Translate contentKey="charuVidyaApp.course.courseLevel">Course Level</Translate>
           </dt>
-          <dd>{courseEntity.courseLevel ? courseEntity.courseLevel.id : ''}</dd>
+          <dd>{courseEntity.courseLevel ? courseEntity.courseLevel.title : ''}</dd>
           <dt>
             <Translate contentKey="charuVidyaApp.course.courseCategory">Course Category</Translate>
           </dt>
-          <dd>{courseEntity.courseCategory ? courseEntity.courseCategory.id : ''}</dd>
+          <dd>{courseEntity.courseCategory ? courseEntity.courseCategory.title : ''}</dd>
           <dt>
             <Translate contentKey="charuVidyaApp.course.courseType">Course Type</Translate>
           </dt>
-          <dd>{courseEntity.courseType ? courseEntity.courseType.id : ''}</dd>
+          <dd>{courseEntity.courseType ? courseEntity.courseType.title : ''}</dd>
           <dt>
             <Translate contentKey="charuVidyaApp.course.user">User</Translate>
           </dt>
           <dd>{courseEntity.user ? courseEntity.user.login : ''}</dd>
-          <dt>
-            <Translate contentKey="charuVidyaApp.course.reviewer">Reviewer</Translate>
-          </dt>
-          <dd>{courseEntity.reviewer ? courseEntity.reviewer.login : ''}</dd>
         </dl>
         <Button tag={Link} to="/course" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

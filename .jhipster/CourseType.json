@@ -6,11 +6,6 @@
   "entityTableName": "course_type",
   "fields": [
     {
-      "fieldName": "id",
-      "fieldType": "Long",
-      "fieldValidateRules": ["required"]
-    },
-    {
       "fieldName": "title",
       "fieldType": "String",
       "fieldValidateRules": ["maxlength", "required"],
